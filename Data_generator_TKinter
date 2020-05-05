@@ -11,14 +11,12 @@ window.title("GENERATOR DANYCH")
 window.geometry("400x200")
 #POLE TEKSTOWE
 poleTekstowe = tkinter.Text(master=window, width=30, height=10)
-#poleTekstowe.configure(state=tkinter.NORMAL)
 poleTekstowe.pack(side=tkinter.RIGHT)
-#window.wm.iconbitmap("filename.ico") http://www.rw-designer.com/online_icon_maker.php
 
 
 def nip():
     #poleTekstowe.configure(state=tkinter.NORMAL)
-    poleTekstowe.delete("0.0",tkinter.END) #po usunieciu generuje jedno pod drugim, teraz pojedynczo
+    poleTekstowe.delete("0.0",tkinter.END)
     a = randint(0, 9)
     b = randint(0, 9)
     c = randint(0, 9)
@@ -69,6 +67,7 @@ def pesel():
     else:
         nazwisko = random.choice(nazwiska_mez)
     print (nazwisko)
+    
     # GENERATOR PESEL
     a = randint(0, 9)
     b = randint(0, 9)
