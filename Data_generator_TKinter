@@ -51,6 +51,7 @@ def nip():
 
 def pesel():
     poleTekstowe.delete("0.0", tkinter.END)
+    #PRZYKŁADOWE LISTY IMION
     imiona_mez = ["Tomasz", "Edmund", "Pafnucy"]
     imiona_kobiet = ["Zofia", "Barbara", "Marzena"]
     imiona = [imiona_kobiet, imiona_mez]
@@ -59,6 +60,7 @@ def pesel():
     print (imie)
 
     # GENERATOR NAZWISK NA BAZIE PLCI
+    #PRZYKŁADOWE LISTY NAZWISK
     nazwiska_mez = ["Złotopolski", "Pieniaski", "Waryński"]
     nazwiska_kob = ["Konwieczówna", "Namakalska", "Domalska"]
     nazwiska = [nazwiska_mez, nazwiska_mez]
