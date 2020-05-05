@@ -1,0 +1,78 @@
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
+class Chapter_one(unittest.TestCase):
+   #"Sample Test Class"
+    @classmethod
+    def setUpClass(cls):
+
+        cls.driver = webdriver.Firefox(executable_path="c:\gecko\geckodriver.exe")
+        cls.driver.get('http://book.theautomatedtester.co.uk/')
+
+    def test_chapter_one(self):
+
+        self.driver.find_element_by_css_selector('a[href="/chapter1"]').click()
+
+        # radio button - find and click
+        self.driver.find_element_by_id('radiobutton').click()
+
+        # drop down menu Selenium and select SELENIUM RC
+        self.driver.find_element_by_id('selecttype').click()
+        self.driver.find_element_by_css_selector('option[value="Selenium RC"]').click()
+
+        # checkbox select
+        self.driver.find_element_by_css_selector('input[name="selected(1234)"]').click()
+
+        # assert text on page-+
+        display = self.driver.find_element_by_id('divontheleft')
+        assert display.text == "Assert that this text is on the page"
+        assert self.driver.page_source.find("Assert that this text is on the page")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
+
+class Chapter_two(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.driver = webdriver.Firefox(executable_path="c:\gecko\geckodriver.exe")
+        cls.driver.get('http://book.theautomatedtester.co.uk/')
+
+    def test_chapter_two(self):
+
+        #Return to Main menu and select CHAPTER2
+        #self.driver.find_element_by_css_selector('a[href="/"]').click()
+        self.driver.find_element_by_css_selector('a[href="/chapter2"]').click()
+
+        # EXPLICIT WAIT & BUTTON CONTROL
+        wait = WebDriverWait(self.driver, 3)
+        element = wait.until(EC.element_to_be_clickable((By.NAME, 'verifybutton')))
+        print(element.is_enabled())
+        print(element.is_displayed())
+        assert element.is_enabled()
+        element.click()
+
+        # CHECKING DISPLAYED TEXT
+        display = self.driver.find_element_by_id('find')
+        # ASSERTING TEXT SEPARATED BY <BR> - \n was used to keep it equal to html
+        assert display.text == "This item div has the id of find\nput find into the target of Selenium IDE\nand click the find button"
+
+        # LOCATING ID WITH changing ID (here by fragment of ID name that is always present)
+        changing_id = self.driver.find_element_by_xpath('//div[starts-with(@id,"time")]')
+        assert changing_id.text == "This element has a ID that changes every time the page is loaded"
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+
